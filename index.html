@@ -767,17 +767,18 @@
       <div class="contact-form">
         <div class="form-group">
           <label>Your Name</label>
-          <input type="text" placeholder="John Doe" />
+          <input type="text" id="cf-name" placeholder="John Doe" />
         </div>
         <div class="form-group">
           <label>Your Email</label>
-          <input type="email" placeholder="john@example.com" />
+          <input type="email" id="cf-email" placeholder="john@example.com" />
         </div>
         <div class="form-group">
           <label>Message</label>
-          <textarea rows="5" placeholder="Hi Haribabu, I'd love to connect about..."></textarea>
+          <textarea rows="5" id="cf-message" placeholder="Hi Haribabu, I'd love to connect about..."></textarea>
         </div>
-        <button class="btn btn-primary" style="width:fit-content">Send Message →</button>
+        <a id="cf-send" class="btn btn-primary" style="width:fit-content" href="mailto:kharibabu482@gmail.com" onclick="return sendContactMessage()">Send Message →</a>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:8px;">Opens your default email app. No email app set up? <a href="mailto:kharibabu482@gmail.com" style="color:var(--accent)">Click here to email directly</a>.</p>
       </div>
 
     </div>
@@ -785,7 +786,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <span>© 2025 K Haribabu · Data Analyst</span>
+    <span>© 2026 K Haribabu · Data Analyst</span>
     <span style="color:var(--accent)">Built with 📊 & passion</span>
     <span>Haribabu-89 · github.com</span>
   </footer>
@@ -801,6 +802,29 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Contact form -> mailto (no backend, opens the visitor's email client).
+    // We update the link's href just before the browser follows it, instead of
+    // forcing navigation with window.location — plain link clicks are far less
+    // likely to get flagged/blocked by browser extensions or security software.
+    function sendContactMessage() {
+      const name = document.getElementById('cf-name').value.trim();
+      const email = document.getElementById('cf-email').value.trim();
+      const message = document.getElementById('cf-message').value.trim();
+
+      if (!name || !email || !message) {
+        alert('Please fill in your name, email, and message before sending.');
+        return false; // cancel navigation
+      }
+
+      const to = 'kharibabu482@gmail.com';
+      const subject = `Portfolio contact from ${name}`;
+      const body = `${message}\n\n— ${name} (${email})`;
+      const mailtoLink = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      document.getElementById('cf-send').href = mailtoLink;
+      return true; // let the browser follow the (now updated) link normally
+    }
   </script>
 
 </body>
