@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>K Haribabu — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F8F5;
+    --ink: #16202B;
+    --ink-soft: #55606B;
+    --line: #D8DDD7;
+    --teal: #1F6F5C;
+    --indigo: #3B4A77;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #10151A;
+      --ink: #EDEFEC;
+      --ink-soft: #A6B0B6;
+      --line: #29323A;
+      --teal: #52C2A2;
+      --indigo: #8B9CE6;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #10151A;
+    --ink: #EDEFEC;
+    --ink-soft: #A6B0B6;
+    --line: #29323A;
+    --teal: #52C2A2;
+    --indigo: #8B9CE6;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--teal); }
+
+  header.site {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  header.site .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 16px; padding-bottom: 16px;
+    gap: 12px; flex-wrap: wrap;
+  }
+  .brand { font-weight: 600; letter-spacing: 0.01em; font-size: 0.95rem; }
+  nav.links { display: flex; gap: 20px; font-size: 0.88rem; }
+  nav.links a { color: var(--ink-soft); text-decoration: none; }
+  nav.links a:hover { color: var(--teal); }
+
+  .hero { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+  .hero h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2.1rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    max-width: 14ch;
+  }
+  .hero p.role {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 58ch;
+    margin: 0 0 28px;
+  }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 18px; font-size: 0.92rem; margin-bottom: 40px; }
+  .hero-links a { text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+
+  .stat-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+  }
+  .stat {
+    padding: 18px 16px 4px 0;
+    border-right: 1px solid var(--line);
+  }
+  .stat:last-child { border-right: none; }
+  .stat .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--teal);
+  }
+  .stat .label { color: var(--ink-soft); font-size: 0.78rem; margin-top: 4px; }
+
+  section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+  }
+  .about p { max-width: 62ch; color: var(--ink-soft); }
+  .about p strong { color: var(--ink); font-weight: 500; }
+
+  .exp-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+  .exp-role { font-weight: 600; }
+  .exp-meta { color: var(--ink-soft); font-size: 0.85rem; font-family: 'IBM Plex Mono', monospace; }
+  ul.bullets { margin: 12px 0 0; padding-left: 20px; color: var(--ink-soft); }
+  ul.bullets li { margin-bottom: 8px; }
+
+  .project { border-left: 2px solid var(--line); padding: 4px 0 4px 20px; margin-bottom: 36px; }
+  .project:last-child { margin-bottom: 0; }
+  .project-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+  .project-head h3 { margin: 0; font-size: 1.08rem; font-weight: 600; }
+  .project-stack { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--indigo); }
+  .project a.repo { font-size: 0.85rem; text-decoration: none; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+  .skill-group h4 { font-size: 0.78rem; text-transform: none; color: var(--ink-soft); margin: 0 0 10px; font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 1px solid var(--line); padding: 4px 10px; border-radius: 3px; font-size: 0.82rem; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .two-col h4 { font-size: 0.95rem; margin: 0 0 10px; }
+  .two-col ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.92rem; }
+  .two-col ul li { margin-bottom: 6px; }
+
+  footer { padding: 40px 0 60px; }
+  footer .row { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+  footer .contact-links { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.92rem; }
+  footer .contact-links a { text-decoration: none; }
+  footer .copy { color: var(--ink-soft); font-size: 0.8rem; margin-top: 24px; }
+
+  .reveal { opacity: 0; transform: translateY(10px); animation: rise 0.7s ease forwards; }
+  .reveal.d1 { animation-delay: 0.05s; }
+  .reveal.d2 { animation-delay: 0.15s; }
+  .reveal.d3 { animation-delay: 0.25s; }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 640px) {
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat { border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+    .two-col { grid-template-columns: 1fr; gap: 28px; }
+    nav.links { gap: 14px; font-size: 0.82rem; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">K HARIBABU</div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero" style="border-bottom:none; padding-bottom:0;">
+    <h1 class="reveal d1">Data becomes decisions.</h1>
+    <p class="role reveal d2">Data Analyst based in Bangalore. I clean messy datasets, build the SQL and Python pipelines behind them, and turn the results into dashboards non-technical teams actually use — across retail, HR, and energy analytics.</p>
+    <div class="hero-links reveal d3">
+      <a href="mailto:kharibabu482@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/k-haribabu-1160a42bb" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Haribabu-89" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <div class="stat-strip reveal d3">
+    <div class="stat"><div class="num">10,000+</div><div class="label">records processed in ETL pipelines</div></div>
+    <div class="stat"><div class="num">8,354</div><div class="label">EV charging sessions analyzed</div></div>
+    <div class="stat"><div class="num">1,400+</div><div class="label">employee records modelled in Power BI</div></div>
+    <div class="stat"><div class="num">₹6.6L+</div><div class="label">revenue tracked in a live dashboard</div></div>
+  </div>
+
+  <section id="about" class="about">
+    <h2>About</h2>
+    <p>I'm an entry-level Data Analyst with a B.Tech in Computer Science (CGPA 8.45/10) and hands-on experience across the full analytics workflow — <strong>ETL, data cleaning, exploratory analysis, dashboarding, and stakeholder reporting</strong>. My comfort zone is taking a raw, inconsistent dataset and turning it into a clear, decision-ready story for people who don't want to look at the raw data themselves.</p>
+    <p>Tools I work in day to day: <strong>SQL, Python (Pandas, NumPy, Matplotlib, Seaborn), Power BI, Tableau, and Advanced Excel.</strong> I've applied them to retail sales, HR attrition, and energy (EV charging) datasets so far.</p>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="exp-row">
+      <div class="exp-role">Data Analyst Intern — Edunoverse Tech Solutions</div>
+      <div class="exp-meta">Feb – Mar 2026 · Remote</div>
+    </div>
+    <ul class="bullets">
+      <li>Built and ran ETL pipelines in SQL and Python across 10,000+ records, producing clean datasets for weekly stakeholder reports.</li>
+      <li>Converted business requirements into Power BI and Excel dashboards, replacing manual reporting with automated, self-serve tools.</li>
+      <li>Built repeatable Python data-validation pipelines that removed manual error-checking from every reporting cycle.</li>
+      <li>Presented findings directly to business and operations teams in plain, non-technical language.</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>EV Charging Station Analysis</h3>
+        <a class="repo" href="https://github.com/Haribabu-89/ev-charging-station-analysis" target="_blank" rel="noopener">View repo →</a>
+      </div>
+      <div class="project-stack">Python · Pandas · NumPy · EDA</div>
+      <ul class="bullets">
+        <li>Cleaned and validated 8,354 charging sessions across 20 stations and 27 fields.</li>
+        <li>Engineered 4 derived metrics — charging efficiency, cost, battery gain, and a peak/off-peak flag — to make station performance comparable.</li>
+        <li>Used Z-score outlier detection and covariance analysis to flag abnormal sessions and quantify power-vs-efficiency relationships.</li>
+        <li>Built 7 charts (bar, pie, histogram, scatter, box plot, line, correlation heatmap) to communicate demand drivers to non-technical readers.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>Super Store Sales & Performance Analysis</h3>
+        <a class="repo" href="https://github.com/Haribabu-89/super-store-sales-analysis" target="_blank" rel="noopener">View repo →</a>
+      </div>
+      <div class="project-stack">SQL · Joins & Subqueries · Business Intelligence</div>
+      <ul class="bullets">
+        <li>Wrote 25 queries across a multi-region sales dataset covering aggregate reporting, GROUP BY / HAVING, and LIMIT / OFFSET pagination.</li>
+        <li>Used pattern matching, range conditions, and scalar / ALL / ANY / IN subqueries to identify top and bottom-performing categories and revenue leakage in underperforming segments.</li>
+        <li>Applied every major join type — inner, left, right, cross, self, and natural — to combine sales and employee data for reporting.</li>
+        <li>Tracked profit margins above 10% by region and segment, delivering findings leadership could act on without touching the raw data.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>Sales & Profit Dashboard</h3>
+      </div>
+      <div class="project-stack">Tableau · Cross-Filtering · Geo Mapping</div>
+      <ul class="bullets">
+        <li>Built an interactive dashboard on the Indian Superstore dataset combining a category-wise bar chart, a dual-axis sales-vs-profit trend line, and a state-level filled map.</li>
+        <li>Linked all three views with a hover action, so selecting a category, sub-category, or region cross-filters the entire dashboard.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>HR Analytics Dashboard</h3>
+        <a class="repo" href="https://github.com/Haribabu-89/hr-analytics-dashboard" target="_blank" rel="noopener">View repo →</a>
+      </div>
+      <div class="project-stack">Power BI · DAX · KPI Reporting</div>
+      <ul class="bullets">
+        <li>Built DAX measures and a data model across 1,400+ employee records to surface attrition drivers.</li>
+        <li>Replaced a manual HR reporting process with a self-serve dashboard using bar, donut, and waterfall visuals.</li>
+        <li>Turned department-level satisfaction scores into concrete retention recommendations for HR leadership.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>Real Mart Sales Analysis</h3>
+        <a class="repo" href="https://github.com/Haribabu-89/real-mart-sales-analysis" target="_blank" rel="noopener">View repo →</a>
+      </div>
+      <div class="project-stack">Excel · Pivot Tables · Dashboarding</div>
+      <ul class="bullets">
+        <li>Built an interactive Excel dashboard tracking ₹6.6L+ in revenue, ₹31K+ profit, and 2,000+ orders using pivot tables, slicers, and dynamic charts.</li>
+        <li>Surfaced seasonal demand patterns and turned them into inventory and marketing recommendations.</li>
+        <li>Compared Cash, Card, and E-wallet usage to inform channel strategy between sales and finance teams.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Databases</h4>
+        <div class="chips"><span class="chip">SQL (joins, subqueries)</span><span class="chip">MySQL</span></div>
+      </div>
+      <div class="skill-group">
+        <h4>Programming</h4>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">Seaborn</span></div>
+      </div>
+      <div class="skill-group">
+        <h4>BI & Visualization</h4>
+        <div class="chips"><span class="chip">Power BI (DAX)</span><span class="chip">Tableau</span><span class="chip">Advanced Excel</span><span class="chip">Google Sheets</span></div>
+      </div>
+      <div class="skill-group">
+        <h4>Analytics practice</h4>
+        <div class="chips"><span class="chip">Data cleaning</span><span class="chip">EDA</span><span class="chip">Feature engineering</span><span class="chip">ETL</span><span class="chip">Outlier detection</span><span class="chip">Time-series analysis</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="two-col">
+      <div>
+        <h2>Certifications</h2>
+        <ul>
+          <li>Introduction to Business Intelligence — Infosys Springboard</li>
+          <li>SQL for Data Analysis — Besant Technologies</li>
+          <li>Power BI — Besant Technologies</li>
+          <li>Advanced Excel — Besant Technologies</li>
+          <li>Data Analytics — Besant Technologies</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Education</h2>
+        <ul>
+          <li><strong style="color:var(--ink)">B.Tech, Computer Science</strong> — Siddartha Institute of Science and Technology, CGPA 8.45/10 (2026)</li>
+          <li>Intermediate (MPC) — Vignana Sudha Jr. College, Chittoor</li>
+          <li>SSC — Z P High School, Chittoor, 93.33%</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <h2>Get in touch</h2>
+    <div class="row">
+      <div class="contact-links">
+        <a href="mailto:kharibabu482@gmail.com">kharibabu482@gmail.com</a>
+        <a href="https://linkedin.com/in/k-haribabu-1160a42bb" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Haribabu-89" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="copy">Bangalore, India</div>
+  </footer>
+</div>
+
+</body>
+</html>
